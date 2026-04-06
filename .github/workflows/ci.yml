@@ -2,7 +2,7 @@ name: Python CI
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -11,12 +11,15 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
+
+      - name: Set PYTHONPATH
+        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
 
       - name: Run Tests
         run: python -m unittest discover
